@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+    <style>
+        .fill-inline {
+	        box-sizing: border-box;
+	        width: 100%;
+        }
+        #map {
+            height: 100vh;
+        }
+    </style>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="./mantela-fetcher/fetch.js"></script>
+    <script src="./main.js" defer></script>
+    <title>Mantela Maps</title>
+</head>
+<body>
+    <header>
+        <h1>Mantela Maps</h1>
+        <p>Mantelaによって記述された局あるいは端末の位置情報を地図に投影します。</p>
+    </header>
+    <main>
+        <section>
+            <form id="formMantela">
+                <fieldset>
+                    <legend>初期設定</legend>
+                    <div>
+                        <label for="urlMantela">mantela.json の URL:</label>
+                        <input type="url" id="urlMantela" name="first" required class="fill-inline" style="font-family: monospace">
+                    </div>
+                    <div>
+                        <label for="checkNest">交換局のホップ数を制限する:</label>
+                        <input type="checkbox" id="checkNest">
+                    </div>
+                    <div>
+                        <label for="numNest">最大ホップ数:</label>
+                        <input type="number" id="numNest" min="0" step="1" class="fill-inline">
+                    </div>
+                    <hr>
+                    <div>
+                        <input type="submit" id="btnGenerate" value="地図を生成..." class="fill-inline">
+                    </div>
+                    <div>
+                        <output id="outputStatus"></output>
+                    </div>
+                </fieldset>
+            </form>
+        </section>
+        <section>
+            <h2>地図</h2>
+            <div id="map"></div>
+        </section>
+    </main>
+    <footer>Copyright 2025 Nejikugi, KusaReMKN, and <a rel="external" href="https://github.com/tkytel/mantela-viewer/graphs/contributors">contributors</a>.
+        <a rel="external" href="https://github.com/scrwnl/mantela-maps">Fork me on GitHub!</a>
+    </footer>
+</body>
+</html>
