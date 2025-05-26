@@ -1,3 +1,4 @@
+"use strict"
 
 const map = L.map(document.getElementById("map"));
 map.setView([35.3622222, 138.7313889], 5);
@@ -24,14 +25,14 @@ document.getElementById("formMantela").addEventListener("submit", async (e) => {
     var pbxs = [];
     mantelas.forEach((entry) => {
         pbxs.push(entry.mantela.aboutMe);
-    });
-    pbxs = pbxs.filter((aboutMe) => {
+    })
+    .filter((aboutMe) => {
       if (aboutMe.geolocationCoordinates != undefined) {
         return true;
       }
       return false;
-    });
-    pbxs.forEach((aboutMe) => {
+    })
+    .forEach((aboutMe) => {
       var marker = L.marker([aboutMe.geolocationCoordinates.latitude, aboutMe.geolocationCoordinates.longitude]).addTo(map);
       marker.bindPopup(aboutMe.name, {autoclose: false});
     });
