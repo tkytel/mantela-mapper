@@ -21,10 +21,10 @@ document.getElementById("formMantela").addEventListener("submit", async (e) => {
     outputStatus.textContent = `Done. (${stop - start} ms)`;
     btnGenerate.disabled = false;
 
-    var terminals = [];
+    var extensions = [];
     var pbxs = [];
-    mantelas.forEach((entry) => {
-        pbxs.push(entry.mantela.aboutMe);
+    mantelas.forEach((mantela) => {
+        pbxs.push(mantela.mantela.aboutMe);
     });
 
     pbxs.filter((aboutMe) => {
@@ -36,8 +36,28 @@ document.getElementById("formMantela").addEventListener("submit", async (e) => {
     .forEach((aboutMe) => {
       var marker = L.marker([aboutMe.geolocationCoordinates.latitude, aboutMe.geolocationCoordinates.longitude]).addTo(map);
       marker.bindPopup(
-        `${aboutMe.name}<br>`
+        `[局] ${aboutMe.name}<br>`
         +`緯度: ${aboutMe.geolocationCoordinates.latitude}<br>`
         +`経度: ${aboutMe.geolocationCoordinates.longitude}`, {autoclose: false});
     });
+
+    mantelas.forEach((mantela) => {
+      mantela.mantela.extensions.forEach((extension) => {
+        extensions.push(extension);
+      });
+    });
+    extensions.filter((extension)=>{
+      if (extension.geolocationCoordinates != undefined) {
+        console.log(extension)
+        return true;
+      }
+      return false;
+    })
+    .forEach((extension)=>{
+      var marker = L.marker([extension.geolocationCoordinates.latitude, extension.geolocationCoordinates.longitude]).addTo(map);
+      marker.bindPopup(
+        `[端末] ${extension.name}<br>`
+        +`緯度: ${extension.geolocationCoordinates.latitude}<br>`
+        +`経度: ${extension.geolocationCoordinates.longitude}`, {autoclose: false});
+    })
 });
