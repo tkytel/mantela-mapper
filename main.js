@@ -61,3 +61,19 @@ document.getElementById("formMantela").addEventListener("submit", async (e) => {
         +`経度: ${extension.geolocationCoordinates.longitude}`, {autoclose: false});
     })
 });
+
+/*
+ * hops のパラメータが指定されているときは自動入力してチェックボックスに印を付ける
+ */
+const urlSearch = new URLSearchParams(document.location.search);
+if (urlSearch.get('hops')) {
+  numNest.value = urlSearch.get('hops');
+  checkNest.checked = true;
+}
+/*
+ * first のパラメータが指定されているときは自動入力して表示する
+ */
+if (urlSearch.get('first')) {
+  urlMantela.value = urlSearch.get('first');
+  btnGenerate.click();
+}
