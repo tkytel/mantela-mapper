@@ -1,3 +1,3 @@
-# Mantela Maps
+# Mantela Mapper
 
-Telephone Network Mandala Maps
+Telephone Network Mandala Mapper
