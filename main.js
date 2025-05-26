@@ -25,8 +25,9 @@ document.getElementById("formMantela").addEventListener("submit", async (e) => {
     var pbxs = [];
     mantelas.forEach((entry) => {
         pbxs.push(entry.mantela.aboutMe);
-    })
-    .filter((aboutMe) => {
+    });
+
+    pbxs.filter((aboutMe) => {
       if (aboutMe.geolocationCoordinates != undefined) {
         return true;
       }
@@ -34,6 +35,9 @@ document.getElementById("formMantela").addEventListener("submit", async (e) => {
     })
     .forEach((aboutMe) => {
       var marker = L.marker([aboutMe.geolocationCoordinates.latitude, aboutMe.geolocationCoordinates.longitude]).addTo(map);
-      marker.bindPopup(aboutMe.name, {autoclose: false});
+      marker.bindPopup(
+        `${aboutMe.name}<br>`
+        +`緯度: ${aboutMe.geolocationCoordinates.latitude}<br>`
+        +`経度: ${aboutMe.geolocationCoordinates.longitude}`, {autoclose: false});
     });
 });
