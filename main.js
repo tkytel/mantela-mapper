@@ -14,7 +14,7 @@ document.getElementById("formMantela").addEventListener("submit", async (e) => {
     const start = performance.now();
     outputStatus.textContent = "";
     const request = checkNest.checked
-		? await fetchMantelas3(urlMantela.value, +numNest.value)
+		? await fetchMantelas3(urlMantela.value, {maxDepth: +numNest.value})
 		: await fetchMantelas3(urlMantela.value)
     const stop = performance.now();
     outputStatus.textContent = `Done. (${stop - start} ms)`;
