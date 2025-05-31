@@ -6,7 +6,6 @@ L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png", {
   attribution: "<a href=\"https://maps.gsi.go.jp/development/ichiran.html\" target=\"_blank\">地理院タイル</a>"
 }).addTo(map);
 
-var mantelas;
 
 document.getElementById("formMantela").addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -14,16 +13,16 @@ document.getElementById("formMantela").addEventListener("submit", async (e) => {
     btnGenerate.disabled = true;
     const start = performance.now();
     outputStatus.textContent = "";
-    const mantelas = checkNest.checked
-		? await fetchMantelas2(urlMantela.value, +numNest.value)
-		: await fetchMantelas2(urlMantela.value)
+    const request = checkNest.checked
+		? await fetchMantelas3(urlMantela.value, {maxDepth: +numNest.value})
+		: await fetchMantelas3(urlMantela.value)
     const stop = performance.now();
     outputStatus.textContent = `Done. (${stop - start} ms)`;
     btnGenerate.disabled = false;
 
     var extensions = [];
     var pbxs = [];
-    mantelas.forEach((mantela) => {
+    request.mantelas.forEach((mantela) => {
         pbxs.push(mantela.mantela.aboutMe);
     });
 
@@ -41,7 +40,7 @@ document.getElementById("formMantela").addEventListener("submit", async (e) => {
         +`経度: ${aboutMe.geolocationCoordinates.longitude}`, {autoclose: false});
     });
 
-    mantelas.forEach((mantela) => {
+    request.mantelas.forEach((mantela) => {
       mantela.mantela.extensions.forEach((extension) => {
         extensions.push(extension);
       });
