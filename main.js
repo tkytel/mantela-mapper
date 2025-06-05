@@ -47,7 +47,7 @@ document.getElementById("formMantela").addEventListener("submit", async (e) => {
     });
     extensions.filter((extension)=>{
       if (extension.geolocationCoordinates != undefined) {
-        console.log(extension)
+        console.log(extension);
         return true;
       }
       return false;
@@ -59,6 +59,12 @@ document.getElementById("formMantela").addEventListener("submit", async (e) => {
         +`緯度: ${extension.geolocationCoordinates.latitude}<br>`
         +`経度: ${extension.geolocationCoordinates.longitude}`, {autoclose: false});
     })
+
+    summaryError.textContent = `エラー情報 (${request.errors.length}件)`
+    request.errors.forEach((error) => {
+      
+    });
+
 });
 
 /*
