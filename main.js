@@ -10,6 +10,10 @@ L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png", {
 document.getElementById("formMantela").addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    // エラー欄を全消去します
+    while(outputError.firstChild) {
+      outputError.removeChild(outputError.firstChild);
+    }
     btnGenerate.disabled = true;
     const start = performance.now();
     outputStatus.textContent = "";
@@ -60,10 +64,32 @@ document.getElementById("formMantela").addEventListener("submit", async (e) => {
         +`経度: ${extension.geolocationCoordinates.longitude}`, {autoclose: false});
     })
 
-    summaryError.textContent = `エラー情報 (${request.errors.length}件)`
+    summaryError.textContent = `エラー情報（${request.errors.length}件）`
     request.errors.forEach((error) => {
-      
-    });
+      const dt = document.createElement("dt");
+      dt.textContent = error.message;
+
+      const ddNameMesg = document.createElement("dd");
+      ddNameMesg.textContent = {
+        TypeError:
+          "Mantela.json の取得に失敗した可能性があります"
+          +"（CORS の設定や HTTP ヘッダを確認してみてください）",
+        Error:
+          "Mantela.json の取得に失敗した可能性があります"
+          +"（正しい URL であるか確認してみてください）",
+        SyntaxError:
+          "Mantela.json の取得に失敗した可能性があります"
+          +"（書式に問題がないか確認してみてください）",
+        AbortError:
+          "Mantela.json の取得に失敗した可能性があります"
+          +"（ネットワークの状態を確認してみてください）"
+      }[error.cause.name];
+
+      const ddCause = document.createElement("dd");
+		  ddCause.textContent = String(error.cause);
+
+      outputError.append(dt, ddNameMesg, ddCause);
+    })
 
 });
 
