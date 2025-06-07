@@ -14,9 +14,9 @@ document.getElementById("formMantela").addEventListener("submit", async (e) => {
     while(outputError.firstChild) {
       outputError.removeChild(outputError.firstChild);
     }
+    outputStatus.textContent = "";
     btnGenerate.disabled = true;
     const start = performance.now();
-    outputStatus.textContent = "";
     const request = checkNest.checked
 		? await fetchMantelas3(urlMantela.value, {maxDepth: +numNest.value})
 		: await fetchMantelas3(urlMantela.value)
