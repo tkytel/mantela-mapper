@@ -88,7 +88,7 @@ document.getElementById("formMantela").addEventListener("submit", async (e) => {
       const ddCause = document.createElement("dd");
 		  ddCause.textContent = String(error.cause);
 
-      outputError.append(dt, ddNameMesg, ddCause);
+      cloneOutputError.append(dt, ddNameMesg, ddCause);
     })
 
 });
