@@ -51,7 +51,6 @@ document.getElementById("formMantela").addEventListener("submit", async (e) => {
     });
     extensions.filter((extension)=>{
       if (extension.geolocationCoordinates != undefined) {
-        console.log(extension);
         return true;
       }
       return false;
