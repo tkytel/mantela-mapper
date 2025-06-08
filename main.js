@@ -11,9 +11,10 @@ document.getElementById("formMantela").addEventListener("submit", async (e) => {
     e.preventDefault();
 
     // エラー欄を全消去します
-    while(outputError.firstChild) {
-      outputError.removeChild(outputError.firstChild);
-    }
+    const cloneOutputError = outputError.cloneNode(false);
+    outputError.parentNode.replaceChild(cloneOutputError, outputError);
+    summaryError.textContent = "エラー情報"
+
     outputStatus.textContent = "";
     btnGenerate.disabled = true;
     const start = performance.now();
