@@ -6,7 +6,7 @@ L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png", {
   attribution: "<a href=\"https://maps.gsi.go.jp/development/ichiran.html\" target=\"_blank\">地理院タイル</a>"
 }).addTo(map);
 
-
+const markers = [];
 document.getElementById("formMantela").addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -14,6 +14,9 @@ document.getElementById("formMantela").addEventListener("submit", async (e) => {
     const cloneOutputError = outputError.cloneNode(false);
     outputError.parentNode.replaceChild(cloneOutputError, outputError);
     summaryError.textContent = "エラー情報"
+
+    // 既に表示されているマーカを全て削除します
+    markers.forEach(e => e.remove());
 
     outputStatus.textContent = "";
     btnGenerate.disabled = true;
@@ -43,6 +46,7 @@ document.getElementById("formMantela").addEventListener("submit", async (e) => {
         `[局] ${aboutMe.name}<br>`
         +`緯度: ${aboutMe.geolocationCoordinates.latitude}<br>`
         +`経度: ${aboutMe.geolocationCoordinates.longitude}`, {autoclose: false});
+      markers.push(marker);
     });
 
     request.mantelas.forEach((mantela) => {
