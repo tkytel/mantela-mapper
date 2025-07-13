@@ -10,11 +10,20 @@
 	        box-sizing: border-box;
 	        width: 100%;
         }
-        #map {
+        .mapContainer {
+            display: flex;
+            flex-direction: column;
             height: 100vh;
+        }
+        .map {
+            flex: 1;
+            position: relative;
+        }
+        #map {
             position: absolute;
-            right: 0;
-            left: 0;
+            width: 100vw;
+            top: 0;
+            bottom: 0;
         }
     </style>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -58,9 +67,11 @@
                 </fieldset>
             </form>
         </section>
-        <section>
+        <section class="mapContainer">
             <h2>地図</h2>
-            <div id="map"></div>
+            <div class="map">
+                <div id="map"></div>
+            </div>
         </section>
     </main>
     <footer>Copyright 2025 Nejikugi, KusaReMKN and <a rel="external" href="https://github.com/tkytel/mantela-mapper/graphs/contributors">contributors</a>.

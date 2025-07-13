@@ -93,6 +93,19 @@ document.getElementById("formMantela").addEventListener("submit", async (e) => {
 
 });
 
+
+/*
+ * 表示結果を大きく表示するためのハック
+ */
+const autoFit = new ResizeObserver(entries => {
+	entries.forEach(e => {
+		e.target.style.left = null;
+		const { x } = e.target.getBoundingClientRect();
+		e.target.style.left = `-${x}px`;
+	});
+});
+autoFit.observe(document.getElementById('map'));
+
 /*
  * hops のパラメータが指定されているときは自動入力してチェックボックスに印を付ける
  */
