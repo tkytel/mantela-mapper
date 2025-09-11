@@ -23,10 +23,10 @@ document.getElementById("formMantela").addEventListener("submit", async (e) => {
     const options = {};
     options.maxDepth = Infinity;
     if (document.getElementById("checkNest").checked) {
-      options.maxDepth = +document.getElementById("numNest").value
+      options.maxDepth = +document.getElementById("numNest").value;
     }
     if (document.getElementById("checkNoCache").checked) {
-      options.cache = "no-cache"
+      options.cache = "no-cache";
     }
     const start = performance.now();
     const request = await fetchMantelas3(urlMantela.value, options);
