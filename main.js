@@ -20,10 +20,16 @@ document.getElementById("formMantela").addEventListener("submit", async (e) => {
 
     outputStatus.textContent = "";
     btnGenerate.disabled = true;
+    const options = {};
+    options.maxDepth = Infinity;
+    if (document.getElementById("checkNest").checked) {
+      options.maxDepth = +document.getElementById("numNest").value;
+    }
+    if (document.getElementById("checkNoCache").checked) {
+      options.cache = "no-cache";
+    }
     const start = performance.now();
-    const request = checkNest.checked
-		? await fetchMantelas3(urlMantela.value, {maxDepth: +numNest.value})
-		: await fetchMantelas3(urlMantela.value)
+    const request = await fetchMantelas3(urlMantela.value, options);
     const stop = performance.now();
     outputStatus.textContent = `Done. (${stop - start} ms)`;
     btnGenerate.disabled = false;
